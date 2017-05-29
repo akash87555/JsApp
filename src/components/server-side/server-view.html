@@ -1,0 +1,8 @@
+<!-- I don't know what I am writing but this could be your server side view -->
+
+<%
+    String[] authors = request.getParameterValues("author");
+    if (authors != null) {
+  %>
+  <%@ page import = "java.sql.*" %>
+  <h3>${rset.firstName}</h3> <h4>${rset.lastName}</h4>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plain-JS app</title>
+    <style media="screen">
+      <%= require('to-string-loader!css-loader!./index.css') %>
+      <%= require('to-string-loader!css-loader!./components/initial-loader/loader.css') %>
+    </style>
+  </head>
+  <body>
+    <% let loaderPath = 'components/initial-loader/' %>
+    <div class="loader-container"><%= require(`html-loader!./${loaderPath}loader.html`) %></div>
+    <div class="header"></div>
+    <div class="main-body">
+      <!-- server side views to be included only during production build -->
+        <% let owner = require('./components/server-side/mock-view.js')() %>
+        <%= require('ejs-loader!./components/server-side/mock-view.html')(owner) %>
+    </div>
+    <div class="footer"></div>
+    <script>
+      var loaderJs = <%= require("./components/initial-loader/loader.js") %>();
+      var mainJs = <%= require("./index.js") %>;
+      setTimeout(() => {
+        mainJs();
+      }, 0);
+    </script>
+    <% if(process.env.NODE_ENV == "production") { %>
+      <script type="text/javascript">
+        (<%= require("./common/scripts/register-sw.js") %>)();
+      </script>
+    <% } %>
+  </body>
+</html>

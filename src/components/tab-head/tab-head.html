@@ -1,0 +1,7 @@
+<ul class="tabs tabs-transparent">
+  <% tabsObject.forEach((tabItem) => { %>
+    <li class="tab">
+      <a href=<%= "#" + tabItem.id %> class=<%= tabItem.initial ? 'active' : '' %> >${tabItem.text}</a>
+    </li>
+  <% }) %>
+</ul>

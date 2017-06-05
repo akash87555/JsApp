@@ -7,7 +7,7 @@
     "build": "npm run clean:dist && webpack --config webpack.prod.js --progress --profile && npm run compress:html && del images",
     "clean:dist": "del dist",
     "serve:dev": "webpack-dev-server --config ./webpack.dev.js --progress --profile --watch --content-base src/ --inline --hot",
-    "start": "concurrently -k \"npm run serve:dev\" \"npm run serve:mock\" ",
+    "start": "node server.js",
     "serve:prod": "http-serve dist -g",
     "serve:mock": "json-server --watch mock-data.json --routes mock-routes.json --port 3004",
     "compress:html": "gzipme dist/index.html"
@@ -60,6 +60,7 @@
     "materialize-css": "^0.98.2",
     "moment": "^2.18.1",
     "moment-range": "^3.0.3",
-    "validator": "^6.2.1"
+    "validator": "^6.2.1",
+    "express": "^4.15.2"
   }
 }

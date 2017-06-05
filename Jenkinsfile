@@ -1,17 +1,9 @@
 pipeline {
-    agent {
-        docker { image 'node:7-alpine' }
-    }
     stages {
         stage('Build') {
             steps {
                 sh 'yarn install'
-            }
-        }
-        stage('Test') {
-            steps {
-                sh 'yarn install'
-                sh 'npm start'
+                sh 'npm run build'
             }
         }
     }

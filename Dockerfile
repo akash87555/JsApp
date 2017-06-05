@@ -2,14 +2,15 @@ FROM node:boron
 
 # Create app directory
 RUN mkdir -p /usr/src/app
-WORKDIR /usr/src/app
 
-# Install app dependencies
-COPY package.json /usr/src/app/
-RUN npm install
+# Install app dependencies AND copy complete code
+WORKDIR /usr/src/app/
+COPY . /usr/src/app/
+RUN yarn install
+RUN npm run build
 
-# Bundle app source
-COPY . /usr/src/app
+ENV NODE_ENV=production
+ENV PORT=3001
 
-EXPOSE 8080
+EXPOSE 3001
 CMD [ "npm", "start" ]

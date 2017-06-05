@@ -3,8 +3,16 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'yarn install'
-                sh 'npm run build'
+                sh 'docker build node-web-app .'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                timeout(time: 3, unit: 'MINUTES') {
+                    retry(5) {
+                        sh 'docker run -p 3002:3001 -d node-web-app'
+                    }
+                }
             }
         }
     }

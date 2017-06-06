@@ -15,6 +15,11 @@ pipeline {
                 }
             }
         }
+        stage('Test') {
+            steps {
+                sh 'curl -i localhost:3002'
+            }
+        }
     }
     post {
         always {
